@@ -1,13 +1,13 @@
 import mysql.connector
 import random
 from datetime import date
-
-mydb = mysql.connector.connect(
-  host="127.0.0.1",
-  user="root",
-  password="root",
-  database="segunda_parte"
-)
+import os
+# mydb = mysql.connector.connect(
+#   host="127.0.0.1",
+#   user="root",
+#   password="root",
+#   database="segunda_parte"
+# )
 
 
 for i in range(40):
@@ -18,7 +18,7 @@ for i in range(40):
         gender = 'F'
     else:
         gender = 'M'
-    suledo = random.uniform(10000,100000)
+    sueldo = random.uniform(1000,100000)
     if gender == 'F':
         cargos = ["Jueza", "Secretaria","vendedor"]
         sCargo = random.choice(cargos)
@@ -30,13 +30,16 @@ for i in range(40):
     jefeId = ["31.840.269","31.840.2693", "31.8401.369"]
     JefeId = random.choice(jefeId)
     comision = 0
-    comision = random.uniform(0,1000)
-    mycursor = mydb.cursor()
+    comision = random.uniform(0,100000)
+    #mycursor = mydb.cursor()
     sql = "INSERT INTO segunda_parte.empleado (nIDemp, nomEmp, sexEmp, fecNa, fecIncorporacion, salEmp, comisionE, cargoE, jefeID, codDepto) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s)"
-    val = (str(i), f'{rand_name}', f'{gender}', today, '2016-03-13 02:32:21', suledo, comision, sCargo, JefeId, dptRandom)
+    val = (str(i), f'{rand_name}', f'{gender}', today, '2016-03-13', sueldo, comision, sCargo, JefeId, dptRandom)
 
-    mycursor.execute(sql, val)
+    # mycursor.execute(sql, val)
 
-    mydb.commit()
+    # mydb.commit()
 
-    print(mycursor.rowcount, "record inserted.")
+    #print(mycursor.rowcount, "record inserted.")
+
+    print("INSERT INTO segunda_parte.empleado (nIDemp, nomEmp, sexEmp, fecNa, fecIncorporacion, salEmp, comisionE, cargoE, jefeID, codDepto) VALUES ('"+str(i)+"','"+rand_name+"','"+gender+"','"+str(today)+"','"+'2016-03-13'+"',",sueldo,",",comision, ",'"+sCargo+"','"+JefeId+"','"+dptRandom+"');")
+    
